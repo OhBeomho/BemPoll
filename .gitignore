@@ -1,0 +1,7 @@
+# Files
+.gitignore,
+.todo
+.env
+
+# Folders
+node_modules/

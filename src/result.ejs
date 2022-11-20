@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>BemPoll - Result</title>
+		<link rel="stylesheet" href="css/main.css" />
+	</head>
+	<body>
+		<header>
+			<nav>
+				<a href="/" class="brand">BemPoll</a>
+				<ul>
+					<li><a href="/create">Create Poll</a></li>
+					<li><a href="/about">About</a></li>
+				</ul>
+			</nav>
+		</header>
+		<main>
+			<h1><%= name %></h1>
+			<h2>Results</h2>
+			<table>
+				<% let maxPollCount = 0; %> <% for (let i = 0; i < options.length; i++) { %> <% const pollCount =
+				polls.filter((e) => e === i).length; %> <% if (pollCount > maxPollCount) { maxPollCount = pollCount; }
+				%> <% } %> <% for (let i = 0; i < options.length; i++) { %>
+				<tr>
+					<td><b><%= options[i] %></b></td>
+					<% const pollCount = polls.filter((e) => e === i).length; %>
+					<td>
+						<progress max="100" value="<%= (pollCount / maxPollCount) * 100 %>"></progress> <%= pollCount %>
+					</td>
+				</tr>
+				<% } %>
+			</table>
+			<button onclick="navigator.clipboard.writeText(`${location.origin}/poll?id=<%= id %>`)">
+				Copy poll link
+			</button>
+			<button onclick="navigator.clipboard.writeText(`${location.origin}/result?id=<%= id %>`)">
+				Copy result link
+			</button>
+			<button id="close" onclick="closePoll('<%= id %>', prompt('Enter the password of this poll.'))">
+				Close Poll
+			</button>
+		</main>
+		<footer>
+			<p>Made by OhBeomho</p>
+			<p>Source on <a href="https://github.com/OhBeomho/BemPoll">Github</a>.</p>
+		</footer>
+
+		<script>
+			function closePoll(id, password) {
+				document.getElementById("close").disabled = true;
+
+				const xhr = new XMLHttpRequest();
+				xhr.open("POST", "/close");
+				xhr.setRequestHeader("Content-Type", "application/json");
+				xhr.send(JSON.stringify({ id, password }));
+				xhr.onreadystatechange = () => {
+					if (xhr.readyState === 4) {
+						if (xhr.status === 200) {
+							alert("The poll closed successfully.");
+							location.href = "/";
+						} else if (xhr.status === 423) {
+							alert("The password is incorrect.");
+						} else if (xhr.status === 500) {
+							alert("An error occurred on the server.");
+						}
+
+						document.getElementById("close").disabled = false;
+					}
+				};
+			}
+		</script>
+	</body>
+</html>

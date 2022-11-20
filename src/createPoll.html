@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>BemPoll - Create</title>
+		<link rel="stylesheet" href="css/main.css" />
+		<style>
+			table input {
+				box-sizing: border-box;
+				margin: 4px 0;
+			}
+
+			#name,
+			#password {
+				width: 100%;
+			}
+
+			form ul {
+				margin: 0;
+			}
+		</style>
+	</head>
+	<body>
+		<header>
+			<nav>
+				<a href="/" class="brand">BemPoll</a>
+				<ul>
+					<li><a href="/create">Create Poll</a></li>
+					<li><a href="/about">About</a></li>
+				</ul>
+			</nav>
+		</header>
+		<main>
+			<h1>Create Poll</h1>
+			<form action="/create" method="post">
+				<table>
+					<tr>
+						<td>
+							<label for="name">Poll name: </label>
+							<input type="text" id="name" name="name" required />
+						</td>
+						<td>
+							<label for="password">Poll password: </label>
+							<input type="password" id="password" name="password" required />
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<h3>Options</h3>
+							<ul>
+								<li>
+									<input type="text" name="options" value="Option 1" style="width: 100%" required />
+								</li>
+							</ul>
+						</td>
+						<td style="vertical-align: bottom">
+							<button type="button" id="newOption">New option +</button>
+						</td>
+					</tr>
+				</table>
+				<div style="width: max-content; margin: 20px auto">
+					<button type="submit">Create</button>
+				</div>
+			</form>
+		</main>
+		<footer>
+			<p>Made by OhBeomho</p>
+			<p>Source on <a href="https://github.com/OhBeomho/BemPoll">Github</a>.</p>
+		</footer>
+
+		<script>
+			const newOptionButton = document.getElementById("newOption");
+			newOptionButton.addEventListener("click", () => {
+				const option = document.createElement("li");
+				option.innerHTML = "<input type='text' name='options' required />";
+
+				const removeButton = document.createElement("button");
+				removeButton.type = "button";
+				removeButton.innerText = "Remove";
+				removeButton.addEventListener("click", () => option.remove());
+
+				option.appendChild(removeButton);
+				document.querySelector("form ul").appendChild(option);
+			});
+		</script>
+	</body>
+</html>

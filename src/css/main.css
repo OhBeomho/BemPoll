@@ -1,0 +1,86 @@
+@import url("https://fonts.googleapis.com/css2?family=Sono:wght@300&display=swap");
+
+* {
+	font-family: "Sono", sans-serif;
+}
+
+html,
+body {
+	margin: 0;
+}
+
+body {
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+}
+
+main {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 50px 0;
+}
+
+nav {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 10px;
+	background-color: black;
+	color: white;
+}
+
+nav a {
+	color: white;
+}
+
+nav ul {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 20px;
+	list-style: none;
+}
+
+nav .brand {
+	font-size: 30px;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+p {
+	margin: 8px 0;
+}
+
+button {
+	background-color: black;
+	color: white;
+	padding: 6px;
+	margin: 4px 2px;
+	border-radius: 8px;
+	border: 0;
+	transition: box-shadow 0.3s;
+}
+
+button:hover {
+	background-color: rgb(60, 60, 60);
+	box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.4);
+}
+
+button:active {
+	background-color: rgb(100, 100, 100);
+}
+
+footer {
+	background-color: lightgray;
+	color: gray;
+	text-align: center;
+}
