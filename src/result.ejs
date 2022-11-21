@@ -21,14 +21,12 @@
 			<h1><%= name %></h1>
 			<h2>Results</h2>
 			<table>
-				<% let maxPollCount = 0; %> <% for (let i = 0; i < options.length; i++) { %> <% const pollCount =
-				polls.filter((e) => e === i).length; %> <% if (pollCount > maxPollCount) { maxPollCount = pollCount; }
-				%> <% } %> <% for (let i = 0; i < options.length; i++) { %>
+				<% for (let i = 0; i < options.length; i++) { %>
 				<tr>
 					<td><b><%= options[i] %></b></td>
 					<% const pollCount = polls.filter((e) => e === i).length; %>
 					<td>
-						<progress max="100" value="<%= (pollCount / maxPollCount) * 100 %>"></progress> <%= pollCount %>
+						<progress max="100" value="<%= (pollCount / polls.length) * 100 %>"></progress> <%= pollCount %>
 					</td>
 				</tr>
 				<% } %>
