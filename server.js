@@ -85,7 +85,7 @@ app.get("/poll", (req, res) => {
 app.post("/create", (req, res) => {
 	const { name, options, password } = req.body;
 
-	db.query("INSERT INTO poll(name, options, password) VALUES($1, $2, $3)", [name, options, password], (err) => {
+	db.query("INSERT INTO poll(name, options, password) VALUES($1, $2, $3)", [name, options.slice(0, 20), password], (err) => {
 		if (err) {
 			res.render("error", { message: "An error occurred.\nError message: " + err.message });
 			console.error(err.message);

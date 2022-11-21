@@ -73,6 +73,11 @@
 		<script>
 			const newOptionButton = document.getElementById("newOption");
 			newOptionButton.addEventListener("click", () => {
+				if (document.querySelectorAll("form ul li").length >= 20) {
+					alert("You can't add more options. (Max: 20)");
+					return;
+				}
+
 				const option = document.createElement("li");
 				option.innerHTML = "<input type='text' name='options' required />";
 
